@@ -1,12 +1,3 @@
-import {
-    _saveQuestion,
-    _saveQuestionAnswer
-} from '../util/_DATA';
-import { 
-    showLoading,
-    hideLoading
-} from 'react-redux-loading';
-
 export const ADD_QUESTION = 'ADD_QUESTION';
 export const GET_QUESTIONS = 'GET_QUESTIONS';
 export const ANSWER_QUESTION = 'ANSWER_QUESTION';
@@ -34,41 +25,3 @@ export function addAnswer({authedUser, qid, answer}){
         answer
     }
 }
-
-function saveQuestion(question){
-    return _saveQuestion(question);
-}
-
-function saveQuestionAnswer({authedUser, qid, answer}){
-    return _saveQuestionAnswer({authedUser, qid, answer});
-}
-
-export function handleAddQuestion(optionOneText, optionTwoText){
-    return (dispatch, getState) => {
-        const {authedUser} = getState();
-        dispatch(showLoading());
-        return saveQuestion({
-            author: authedUser,
-            optionOneText,
-            optionTwoText
-        })
-        .then(question => dispatch(addQuestion(question)))
-        .then(() => dispatch(hideLoading()));
-    }
-}
-
-export function handleAnswer(ans){
-    return (dispatch, getState) => {
-        const { authedUser } = getState();
-        const answeredQuestion = {
-            authedUser,
-            qid: ans.id,
-            answer: ans.id
-        };
-        dispatch(showLoading());
-        dispatch(addAnswer(answeredQuestion));
-        return saveQuestionAnswer(answeredQuestion)
-        .then(() => dispatch(hideLoading()));
-    }
-}
-
