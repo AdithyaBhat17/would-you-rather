@@ -1,0 +1,52 @@
+@font-face{
+    src: url('../assets/fonts/Dionisio-Bold.ttf');
+    font-family: 'Dionisio';
+}
+  
+@font-face{
+    src: url('../assets/fonts/DankMono-Regular.ttf');
+    font-family: 'Dank';
+}
+
+.navbar-brand{
+    font-family: 'Dionisio';
+    font-size: 1.5em;
+}
+  
+.nav>li>a{
+    font-family: Dank;
+    font-size: 1em;
+}
+  
+.navbar-brand, .nav>li>a{
+    text-decoration: none;
+    color:#fff !important
+}
+  
+.navbar-default .navbar-toggle {
+     border:0
+}
+  
+.navbar-toggle .icon-bar{
+    background-color:#fff !important
+}
+  
+.icon-bar:nth-child(3){
+    width: 50%;
+}
+  
+.icon-bar:nth-child(4){
+    width: 70%;
+}
+
+.navbar-default .navbar-toggle:hover {
+    background-color: transparent;
+}
+  
+.navbar, .navbar-default{
+    background-color:#000;
+    color: #fff;
+    border-radius: 0;
+    border: none;
+    box-shadow: 3px 3px 3px 0 rgba(0,0,0,0.1)
+}
