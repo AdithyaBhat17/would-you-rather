@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { loading } from './loading';
+import loading from './loading';
 import questions from './questions';
 import users from './users';
 import authUser from './authentication';
