@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import Navbar from './Navbar';
 import Login from './Login';
 import Error from './Error';
@@ -7,16 +7,15 @@ import { getInitialData } from '../actions/shared';
 import { bindActionCreators } from 'redux';
 import { logIn, logOut } from '../actions/authentication';
 import { BrowserRouter as Router, Route, withRouter, Switch } from 'react-router-dom';
+import LeaderBoard from './LeaderBoard';
 
 class App extends Component {
   constructor(props){
     super(props);
     this.state = {
       loading : false,
-      users: [],
       selectedUser: '',
       userAvatar: '',
-      questions: [],
       login: false
     };
     this.onLogin = this.onLogin.bind(this);
@@ -32,6 +31,8 @@ class App extends Component {
     })
     this.props.getInitialData();
   }
+
+  componentDidUpdate(prevProps, prevState) {}
 
   onLogin(){
     this.props.logIn(this.state.selectedUser);
@@ -66,30 +67,40 @@ class App extends Component {
     return (
       <div className="App">
         <Router>
-          <Fragment>
+          <React.Fragment>
             <Navbar
             logOut = {this.onLogout}
             authedUser = {this.props.authedUser}
             userAvatar = {this.state.userAvatar}/>
-            <Switch>
+            <LeaderBoard
+            users={this.props.users}
+            loading={this.props.loading}/>
+            {/* <Switch>
               {this.props.authedUser !== null && this.props.authedUser !== undefined && this.props.authedUser !== "" ? (
-                <Fragment>
-                  <Error/>
-                </Fragment>
+                <React.Fragment>
+                  <Route
+                  exact path="/leaderboard"
+                  render={() => (
+                    <LeaderBoard
+                     users={this.props.users}
+                     loading={this.props.loading}/>
+                  )}/>
+                  
+                </React.Fragment>
               ) : (
                 <Route 
-                exact path="/"
-                render={() => (
-                  <Login 
-                  loading={this.props.loading}
-                  onSelect={this.selectUser}
-                  selectedUser={this.state.selectedUser}
-                  onLogIn={this.onLogIn}/>
-                )}/>
-              )}
-              <Route component={Error}/>
-            </Switch>
-          </Fragment>
+                  exact path="/"
+                  render={() => (
+                    <Login 
+                    loading={this.props.loading}
+                    onSelect={this.selectUser}
+                    selectedUser={this.state.selectedUser}
+                    onLogIn={this.onLogIn}/>
+                  )}/>
+                )}
+                <Route component={Error}/>
+            </Switch> */}
+          </React.Fragment>
         </Router>
       </div>
     )

@@ -1,7 +1,7 @@
 import { GET_USERS, ADD_QUESTION_BY_USER } from '../actions/users';
 import { ANSWER_QUESTION } from '../actions/questions'; // users object has a property answers which is a list of all the questions answered by the user.
 
-export default function users(state = {}, action){
+export default function users(state = null, action){
     switch(action.type){
         case GET_USERS:
             return {
