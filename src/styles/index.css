@@ -8,19 +8,85 @@
   font-family: 'Dank';
 }
 
+img{
+  max-width: 100%;
+}
+
+.would-img{
+  margin-top:5vh;
+}
+
+.tagline-s{
+  font-family: Dionisio;
+  margin-top:25vh;
+}
+
+.login-img{
+  margin-top:15vh;
+}
+
+.tagline{
+  font-family: Dionisio;
+  margin-top:30vh;
+}
+.welcome{
+  font-family: Dionisio;
+}
+.welcome,label{
+  text-align:left !important;
+}
+
+.about,.tagline{
+  text-align: left;
+}
+
 body {
   margin: 0;
   padding: 0;
+  font-size: 16px;
   font-family: Dank;
   color: #000;
 }
 
 .App {
-  text-align: center;
+  padding-bottom:10px;
 }
 
 .loading{
   margin-top:25vh;
+}
+
+.avatar{
+  width: 80px;
+  height:80px;
+  border-radius: 50%;
+  border:3px solid #000;
+  padding: 5px;
+}
+
+.tab:active{
+  background-color: #000;
+}
+
+.tab{
+  text-align: center;
+  margin-top:15px;
+  background-color:#000000dd;
+  color:#fff;
+  font-size: 1.25em;
+  cursor: pointer;
+}
+.tab:nth-child(1){
+  border-right: 2px solid #fff;
+}
+
+.form-control {
+  color: #000;
+  border:none;
+  border-bottom: 2px solid #000;
+  border-radius: 0;
+  outline: none !important;
+  box-shadow: 0 0 0!important;
 }
 
 .login{
@@ -35,6 +101,46 @@ body {
   margin-top:25vh;
   font-size: 2em
 }
+
+@media only screen and (max-width:768px){
+  .would-img{
+    margin-top:10vh
+  }
+  .tagline-s{
+    margin-top:10px;
+    font-size:2em;
+    text-align: left
+  }
+  .tagline{
+    margin-top:10px;
+    font-size:2em;
+    text-align: center
+  }
+  .about{
+    text-align: center;
+  }
+}
+
+@media only screen and (min-width:1440px){
+  .tagline{
+    margin-top: 35vh;
+    font-size: 3.5em;
+  }
+  .tagline-s{
+    margin-top: 30vh;
+    font-size: 3.5em;
+  }
+  .about{
+    font-size: 18px;
+  }
+  .login-img{
+    margin-top: 26vh;
+  }
+  .would-img{
+    margin-top:20vh
+  }
+}
+
 
 
 

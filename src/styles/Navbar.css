@@ -43,6 +43,10 @@
     background-color: transparent;
 }
   
+.nav>li{
+    text-align: center;
+}
+
 .navbar, .navbar-default{
     background-color:#000;
     color: #fff;
