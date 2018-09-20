@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom'
 
 const Error = () => {
     return(
-        <div className="container">
-            <p class="error-text">Oof! Looks like you're lost mate</p>
+        <div className="container" style={{textAlign:`center`}}>
+            <p class="error-text">Oof! Looks like you're lost mate.</p>
             <Link 
-             to="/"
+             to="/login"
              className="login"
              style={{textDecoration:`none`,color:`#fff`}}>Take me back!</Link>
         </div>
