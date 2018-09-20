@@ -1,7 +1,10 @@
-import { GET_USERS, ADD_QUESTION_BY_USER } from '../actions/users';
-import { ANSWER_QUESTION } from '../actions/questions'; // users object has a property answers which is a list of all the questions answered by the user.
+import { 
+    GET_USERS,
+    ADD_QUESTION_BY_USER,
+    ADD_ANSWER_BY_USER    
+} from '../actions/users';
 
-export default function users(state = null, action){
+export default function users(state = {}, action){
     switch(action.type){
         case GET_USERS:
             return {
@@ -11,18 +14,18 @@ export default function users(state = null, action){
         case ADD_QUESTION_BY_USER:
             return {
                 ...state,
-                [action.authedUser]: {
-                    ...state[action.authedUser],
-                    questions: state[action.authedUser].questions.concat([action.qid])
+                [action.question.author]: {
+                    ...state[action.question.author],
+                    questions: [...state[action.question.author].questions, action.question.id]
                 }
             }
-        case ANSWER_QUESTION: 
+        case ADD_ANSWER_BY_USER: 
             return {
                 ...state,
-                [action.authedUser]: {
-                    ...state[action.authedUser],
+                [action.authUser]: {
+                    ...state[action.authUser],
                     answers: {
-                        ...state[action.authedUser].answers,
+                        ...state[action.authUser].answers,
                         [action.qid]: action.answer
                     }
                 }
