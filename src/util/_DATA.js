@@ -1,8 +1,12 @@
+import mikeimg from '../assets/mike.jpg';
+import shrekimg from '../assets/shrek.png';
+import patrickimg from '../assets/patrick.jpg';
+
 let users = {
   mikewazowski: {
     id: 'mikewazowski',
     name: 'Mike Wazowski',
-    avatarURL: '../assets/mike.jpg',
+    avatarURL: mikeimg,
     answers: {
       "8xf0y6ziyjabvozdd253nd": 'optionOne',
       "6ni6ok3ym7mf1p33lnez": 'optionOne',
@@ -14,7 +18,7 @@ let users = {
   shrek: {
     id: 'shrek',
     name: 'Shrek',
-    avatarURL: '../assets/shrek.png',
+    avatarURL: shrekimg,
     answers: {
       "vthrdm985a262al8qx3do": 'optionOne',
       "xj352vofupe1dqz9emx13r": 'optionTwo',
@@ -24,7 +28,7 @@ let users = {
   patrick: {
     id: 'patrick',
     name: 'Patrick',
-    avatarURL: '../assets/patrick.jpg',
+    avatarURL: patrickimg,
     answers: {
       "xj352vofupe1dqz9emx13r": 'optionOne',
       "vthrdm985a262al8qx3do": 'optionTwo',
@@ -198,6 +202,34 @@ export function _saveQuestionAnswer ({ authedUser, qid, answer }) {
 
       res()
     }, 500)
+  })
+}
+
+export function _saveNewUser({ username, name }){
+  return new Promise((res, rej) => {
+    setTimeout(() => {
+      Object.keys(users).map(user => {
+        if (user === username) {
+          res({
+            error: 'Username Already Taken'
+          })
+        }
+      })
+      users = {
+        ...users,
+        [username]: {
+          id: username,
+          name,
+          avatarURL: '',
+          answers: {},
+          questions: []
+        }
+      }
+
+      res({
+        ...users
+      })
+    }, 1000)
   })
 }
 
