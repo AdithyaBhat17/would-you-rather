@@ -1,6 +1,6 @@
 export const GET_USERS = 'GET_USERS';
 export const ADD_QUESTION_BY_USER = 'ADD_QUESTION';
-export const ADD_ANSWER = 'ADD_ANSWER';
+export const ADD_ANSWER_BY_USER = 'ADD_ANSWER';
 
 export function getUsers(users){
     return {
@@ -9,18 +9,17 @@ export function getUsers(users){
     }
 }
 
-export function addQuestionByUser(authedUser, qid){
+export function addQuestionByUser(question){
     return {
         type: ADD_QUESTION_BY_USER,
-        authedUser,
-        qid
+        question
     }
 }
 
-export function addAnswerByUser(authedUser, qid, answer){
+export function addAnswerByUser(authUser, qid, answer){
     return {
-        type: ADD_ANSWER,
-        authedUser,
+        type: ADD_ANSWER_BY_USER,
+        authUser,
         qid,
         answer
     }

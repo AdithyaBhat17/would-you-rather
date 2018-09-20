@@ -1,60 +1,64 @@
 import {
-    _getUsers,
-    _getQuestions,
-    _saveQuestion,
-    _saveQuestionAnswer
-} from '../util/_DATA';
+    getInitialData,
+    saveQuestionAnswer,
+    saveQuestion,
+    saveNewuser
+} from '../util/api';
 import { getUsers, addQuestionByUser, addAnswerByUser } from './users';
 import { getQuestions, addQuestion, addAnswer } from './questions';
-import { showLoading, hideLoading } from './loading';
+import { logIn } from './authentication';
  
-export function getInitialData(){
-    return (dispatch) => {
-        dispatch(showLoading())
-        return Promise.all([
-            _getUsers,
-            _getQuestions
-        ]).then(([users, questions]) => {
-            dispatch(getUsers(users));
-            dispatch(getQuestions(questions));
-            dispatch(hideLoading());
-        });
-    }    
-}
+export const INITIAL_DATA = 'INITIAL_DATA';
 
-export function saveQuestion(optionOneText, optionTwoText){
-    return (dispatch, getState) => {
-        const { authedUser } = getState();
-        dispatch(showLoading());
-        return _saveQuestion({
-            optionOneText,
-            optionTwoText,
-            author: authedUser
-        })
-        .then((question) => {
-            dispatch(addQuestion(question));
-            dispatch(addQuestionByUser(authedUser, question.id))
-        })
-        .then(() => dispatch(hideLoading()));
+export function handleInitialData () {
+    return (dispatch) => {
+      getInitialData().then(({users, questions}) => {
+        dispatch(getUsers(users))
+        dispatch(getQuestions(questions))
+        dispatch(logIn(null))
+      })
+    }
+  }
+
+export function addUserAction(username, name){
+    return dispatch => {
+        saveNewuser({ username, name}).then(users => {
+            if(users.error){
+                console.error('Username already taken');
+            }else{
+                dispatch(getUsers(users));
+                dispatch(logIn(username));
+            }
+        });
     }
 }
 
-export function handleSaveAnswer(qid, answer){
-    return (dispatch, getState) => {
-        const { authedUser } = getState();
-        dispatch(showLoading());
-        return _saveQuestionAnswer({
-            authedUser,
-            qid,
-            answer
+export function addQuestionAction(authUser, one, two){
+    return dispatch => {
+        saveQuestion({
+            optionOneText: one,
+            optionTwoText: two,
+            author: authUser
         })
+        .then(question => {
+            dispatch(addQuestionByUser(question));
+            dispatch(addQuestion(question));
+        });
+    }
+}
+
+export function addAnswerAction(authUser, qid, answer){
+    const { info } = {
+        authedUser:authUser,
+        qid,
+        answer
+    }
+    return dispatch => {
+        saveQuestionAnswer(info)
         .then(() => {
-            dispatch(addAnswer(authedUser, qid, answer));
-            dispatch(addAnswerByUser(authedUser, qid, answer));
-        })
-        .then(() => {
-            dispatch(hideLoading());
-        })
+            dispatch(addAnswer(authUser, qid, answer));
+            dispatch(addAnswerByUser(authUser, qid, answer));
+        });
     }
 }
 

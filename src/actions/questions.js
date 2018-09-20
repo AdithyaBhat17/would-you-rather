@@ -16,11 +16,10 @@ export function getQuestions(questions){
     }
 }
 
-// pass an object as parameter to get who answered the question and which question was answered along with the voted answer.
-export function addAnswer({authedUser, qid, answer}){
+export function addAnswer(authUser, qid, answer){
     return {
         type: ANSWER_QUESTION,
-        authedUser,
+        authUser,
         qid,
         answer
     }
