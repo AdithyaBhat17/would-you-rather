@@ -1,39 +1,118 @@
 import React from 'react';
-import loadingimg from '../assets/loading.gif';
 import { connect } from 'react-redux';
-
+import { logIn } from '../actions/authentication';
+import { addUserAction } from '../actions/shared';
+import { Redirect } from 'react-router-dom';
+import loginimg from '../assets/login.svg';
+import Navbar from './Navbar';
 class Login extends React.Component{
+    constructor(props){
+        super(props);
+        this.state = {
+            login: false,
+            redirect: false,
+            userNotFound: false,
+            usernameTaken: false
+        }
+        this.switchTabs = this.switchTabs.bind(this);        
+        this.loginForm = this.loginForm.bind(this);
+        this.signupForm = this.signupForm.bind(this);        
+    }
+
+    switchTabs(action){
+        action === 'login' ? this.setState({login: true}) : this.setState({login: false})
+    }
+
+    loginForm(e){
+        e.preventDefault();
+        const username = e.target[0].value;
+        console.log('username',username);
+        const { users, dispatch } = this.props;
+        users.map(user => {
+            if(user === username){
+                dispatch(logIn(username));
+                this.setState({redirect:true});
+            }else{
+                this.setState({userNotFound: true});
+            }
+        });
+    }
+
+    signupForm(e){
+        e.preventDefault();
+        const username = e.target[0].value;
+        const name = e.target[1].value;
+        console.log(username + name);
+        const { users, dispatch } = this.props;
+        users.map(user => {
+            if(user === username){
+                this.setState({usernameTaken: true});
+            }
+        });
+        dispatch(addUserAction(username, name));
+    }
+
     render(){
+        const { login, redirect, userNotFound, usernameTaken } = this.state;
+        const { authUser } = this.props;
+        if(redirect || authUser !== null)
+            return <Redirect to="/dashboard"/> 
         return(
-            this.props.loading === true ? <img src={loadingimg} alt="loading" className="loading"/> : (
+            <div>
+                <Navbar/>
                 <div className="container">
-                    <h1 className="choose-header">Choose your fighter</h1>
                     <div className="row">
-                        {
-                            this.props.users !== null && Object.values(this.props.users).map((user) => (
-                                <div className="col-md-4 col-sm-12" key={user.id} onClick={() => this.props.onSelect(user.id)}>
-                                    <div className="thumbnail">
-                                        <img src={user.avatarURL} alt="{user.name}" className="character"/>
-                                        <h4 className="username">{user.name}</h4>
+                        <div className="col-md-6 col-sm-12">
+                            <div style={login ? {display:`block`} : {display:`none`}}>
+                                <h1 className="tagline">Welcome Back!</h1>
+                                <form onSubmit={this.loginForm} className="form">
+                                    <div className="form-group">
+                                        <label htmlFor="username">Username</label>
+                                        <input type="text" id="username" className="form-control" placeholder="shrek"/>
                                     </div>
-                                </div>
-                            ))
-                        }
+                                    <button className="login" type="submit">Let me in!</button>
+                                    <span 
+                                    onClick={() => this.switchTabs('register')}
+                                    style={{fontSize:`12px`,marginLeft:`5px`,cursor:`pointer`}}
+                                    >New here? Please sign up</span>
+                                    {userNotFound && <div style={{color:`#ff0000`}}>Hey! Looks like you're new here.. try signing up</div>}
+                                </form>
+                            </div>
+                            <div style={login === false ? {display:`block`} : {display:`none`}}>
+                                <h1 className="tagline-s">Signup to get started!</h1>
+                                <form onSubmit={this.signupForm} className="form">
+                                    <div className="form-group">
+                                        <label htmlFor="username">Username</label>
+                                        <input type="text" id="username" className="form-control" placeholder="shrek"/>
+                                    </div>
+                                    <div className="form-group">
+                                        <label htmlFor="name">Name</label>
+                                        <input type="text" id="name" className="form-control" placeholder="Shrek"/>
+                                    </div>
+                                    <button className="login" type="submit">Let me in!</button>
+                                    <span 
+                                    onClick={() => this.switchTabs('login')}
+                                    style={{fontSize:`12px`,marginLeft:`5px`,cursor:`pointer`}}
+                                    >Already a member? Login here</span>
+                                    {usernameTaken && <div style={{color:`#ff0000`}}>Hey! Looks like you've been here before,try logging in</div> }
+                                </form>
+                            </div>                             
+                        </div>
+                        <div className="col-md-6 col-sm-12">
+                            <img className="login-img" src={loginimg} alt="Login"/>
+                        </div>
                     </div>
-                    <button 
-                    className="login"
-                    onClick={this.props.onLogin}>
-                        Get in!
-                    </button>
                 </div>
-            )    
+            </div>
         );
     }
 }
 
-const mapStateToProps = (state) => {
+function mapStateToProps ({users, authUser}){
+    const usersProp = Object.keys(users);
     return{
-        users: state.users
+        users: usersProp,
+        authUser
     }
 }
 
