@@ -64,14 +64,74 @@ body {
   padding: 5px;
 }
 
-.tab:active{
+
+.active{
+  background-color: #000 !important;
+  opacity: 1 !important;
+}
+
+.questions{
+  padding: 0 !important;
+  /* display: flex; */
+  margin-left:-10px !important; 
+}
+
+.thumbnail{
+  padding: 25px;
+  border:1px solid #000;
+  border-radius: 0;
+  margin:0 !important;
+  box-shadow: 5px 5px 5px 0 rgba(0,0,0,0.1);
+  text-align: center;
+  width: 100%;
+  cursor: pointer;
+  float: left;
+}
+
+.progress {
+  margin-top: 25px;
+  margin-left: -30px !important; 
+  width: 100% !important;
+  background: #000;
+  height: 25px;
+  text-align: center;
+  border-radius: 0;
+  display: inline-flex;
+  color: #E8F1E8;
+  font-size: 20px;
+}
+
+.progress>.col-xs-6:nth-child(2){
+  border-left:2px solid #fff;
+}
+
+h4{
+  margin-top:15px;
+  font-weight: bold;
+}
+
+.thumbnail-info{
+  padding: 25px 4px;
+  font-weight: bold;
+  border:1px solid #181818;
+  border-radius: 0;
+  background-color:#181818;
+  margin:0 !important;
+  box-shadow: 5px 5px 5px 0 rgba(0,0,0,0.1);
+  text-align: center;
+  cursor: pointer;
+}
+
+.selected{
   background-color: #000;
+  color:#fff;
 }
 
 .tab{
   text-align: center;
   margin-top:15px;
-  background-color:#000000dd;
+  opacity: 0.9;
+  background-color:#000000cc;
   color:#fff;
   font-size: 1.25em;
   cursor: pointer;
@@ -93,18 +153,29 @@ body {
   background-color: #000;
   color: #fff;
   border:none;
-  padding:5px 15px;
+  padding:10px 15px;
   box-shadow: 5px 5px 5px 0 rgba(0,0,0,0.1)
 }
 
 .error-text{
-  margin-top:25vh;
+  margin-top:25px;
   font-size: 2em
+}
+.error-img{
+  width: 50%;
+  margin-top:10vh;
 }
 
 @media only screen and (max-width:768px){
   .would-img{
     margin-top:10vh
+  }
+  .progress {
+    margin-left:0px !important;
+    width: 100% !important;
+  }
+  .questions{
+    margin-left: 0 !important; 
   }
   .tagline-s{
     margin-top:10px;
@@ -118,6 +189,19 @@ body {
   }
   .about{
     text-align: center;
+  }
+  .error-img{
+    width: 100%;
+    margin-top:10vh;
+  }
+  .thumbnail-info{
+    padding: 4px;
+    border:1px solid #000;
+    border-radius: 0;
+    margin:0 !important;
+    box-shadow: 5px 5px 5px 0 rgba(0,0,0,0.1);
+    text-align: center;
+    cursor: pointer;
   }
 }
 
@@ -138,6 +222,10 @@ body {
   }
   .would-img{
     margin-top:20vh
+  }
+  .error-img{
+    width: 70%;
+    margin-top:10vh;
   }
 }
 
