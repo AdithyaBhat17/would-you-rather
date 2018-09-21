@@ -3,6 +3,7 @@ import Navtab from './Navtab';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import Usertab from './Usertab';
+import Questioncard from './Questioncard';
 
 class Dashboard extends React.Component{
     constructor(props){
@@ -21,6 +22,7 @@ class Dashboard extends React.Component{
 
     render(){
         const { answeredQuestions, unansweredQuestions, user, authUser } = this.props;
+        const { answeredQuestion } = this.state;
         if(authUser === null)
             return <Redirect to="/login"/>
         return (
@@ -32,15 +34,30 @@ class Dashboard extends React.Component{
                         <div className="row">
                             <div
                             onClick={this.toggle}
-                            className="col-xs-6 tab">
-                                Answered
+                            className={ !answeredQuestion ? 'active tab col-xs-6' : 'tab col-xs-6'}>
+                                Unanswered
                             </div>
                             <div
                             onClick={this.toggle}
-                            className="col-xs-6 tab">
-                                Unanswered
+                            className={answeredQuestion ? 'active tab col-xs-6' : 'tab col-xs-6'}>
+                                Answered
                             </div>
                         </div>
+                    </div>
+                    <div className="container cards">
+                        {answeredQuestion && answeredQuestions.map(question => (
+                            <Questioncard 
+                            question={question} 
+                            key={question.id} 
+                            answer={user.answers[question.id]} 
+                            />
+                        ))}
+                        { !answeredQuestion && unansweredQuestions.map(question => (
+                            <Questioncard 
+                            question={question} 
+                            key={question.id}
+                            />
+                        ))}
                     </div>
                 </div>
             </div>
@@ -54,14 +71,14 @@ function mapStateToProps({questions, users, authUser}){
     let unansweredQuestions = [];
     if(authUser !== null)
         user = users[authUser];
-    Object.keys(questions)
+    Object.keys(questions).map(no => questions[no])
     .filter(question => {
         if(user.answers.hasOwnProperty(question.id))
             answeredQuestions.push(question);
         else{ 
             unansweredQuestions.push(question);
         }
-    }).map(no => questions[no]);
+    });
     return {
         answeredQuestions,
         unansweredQuestions,

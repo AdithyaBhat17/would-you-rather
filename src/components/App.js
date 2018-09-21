@@ -8,6 +8,7 @@ import { Switch, Route, withRouter } from 'react-router-dom';
 import Home from './Home';
 import Dashboard from './Dashboard';
 import Logout from './Logout';
+import Questioninfo from './Questioninfo';
 
 class App extends Component {
   componentDidMount(){
@@ -21,6 +22,7 @@ class App extends Component {
           <Route exact path="/" component={Home}/>
           <Route path="/login" component={Login}/>
           <Route path="/dashboard" component={Dashboard}/>
+          <Route exact path="/questions/:question_id" component={Questioninfo}/>
           <Route path="/logout" component={Logout}/>
           <Route component={Error}/> {/* https://tylermcginnis.com/react-router-handling-404-pages/ */}
         </Switch>
