@@ -48,8 +48,8 @@ export function addQuestionAction(authUser, one, two){
 }
 
 export function addAnswerAction(authUser, qid, answer){
-    const { info } = {
-        authedUser:authUser,
+    const info = {
+        authedUser: authUser,
         qid,
         answer
     }
