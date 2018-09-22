@@ -208,13 +208,13 @@ export function _saveQuestionAnswer ({ authedUser, qid, answer }) {
 export function _saveNewUser({ username, name }){
   return new Promise((res, rej) => {
     setTimeout(() => {
-      Object.keys(users).map(user => {
-        if (user === username) {
-          res({
+      Object.keys(users).map(user => (
+        user === username ? 
+        res({
             error: 'Username Already Taken'
-          })
-        }
-      })
+          }) : 
+          console.log('success')
+      ));
       users = {
         ...users,
         [username]: {
