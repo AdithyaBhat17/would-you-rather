@@ -12,6 +12,10 @@ img{
   max-width: 100%;
 }
 
+textarea{
+  resize: none;
+}
+
 .would-img{
   margin-top:5vh;
 }
@@ -72,9 +76,25 @@ body {
 
 .questions{
   padding: 0 !important;
-  /* display: flex; */
+  display: flex;
   margin-left:-10px !important; 
 }
+
+.table-responsive{
+  border:0;
+}
+
+.table{
+  margin-top: 25px;
+}
+
+table,th,td{
+  padding: 15px !important;
+  border: 2px solid #000;
+  text-align: center;
+}
+
+
 
 .thumbnail{
   padding: 25px;
@@ -100,6 +120,7 @@ body {
   color: #E8F1E8;
   font-size: 20px;
 }
+
 
 .progress>.col-xs-6:nth-child(2){
   border-left:2px solid #fff;
@@ -149,7 +170,7 @@ h4{
   box-shadow: 0 0 0!important;
 }
 
-.login{
+.login,.submit{
   background-color: #000;
   color: #fff;
   border:none;
@@ -157,13 +178,37 @@ h4{
   box-shadow: 5px 5px 5px 0 rgba(0,0,0,0.1)
 }
 
+.down{
+  margin-bottom: 15px !important;
+}
+
+.lead-img{
+  width:50px;
+  border:2px solid #000;
+  border-radius:50%;
+  padding:5px;
+}
+
+.submit{
+  display: block;
+  text-align:center;
+  margin: 30px auto !important;
+}
+
 .error-text{
   margin-top:25px;
   font-size: 2em
 }
 .error-img{
+  display: block;
   width: 50%;
-  margin-top:10vh;
+  margin:10vh auto;
+}
+
+.poll-input{
+  border: 0;
+  text-align: center;
+  font-size: 18px;
 }
 
 @media only screen and (max-width:768px){
