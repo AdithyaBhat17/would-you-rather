@@ -4,11 +4,12 @@ import Error from './Error';
 import { connect } from 'react-redux';
 import { handleInitialData } from '../actions/shared';
 import { Switch, Route, withRouter } from 'react-router-dom';
-// import LeaderBoard from './LeaderBoard';
 import Home from './Home';
 import Dashboard from './Dashboard';
 import Logout from './Logout';
 import Questioninfo from './Questioninfo';
+import AddQuestion from './AddQuestion';
+import LeaderBoard from './LeaderBoard';
 
 class App extends Component {
   componentDidMount(){
@@ -24,6 +25,8 @@ class App extends Component {
           <Route path="/dashboard" component={Dashboard}/>
           <Route exact path="/questions/:question_id" component={Questioninfo}/>
           <Route path="/logout" component={Logout}/>
+          <Route path="/add" component={AddQuestion}/>
+          <Route path="/leaderboard" component={LeaderBoard}/>
           <Route component={Error}/> {/* https://tylermcginnis.com/react-router-handling-404-pages/ */}
         </Switch>
       </div>

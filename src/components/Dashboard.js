@@ -17,7 +17,7 @@ class Dashboard extends React.Component{
         this.setState(prev => ({
             answeredQuestion : !prev.answeredQuestion
         }));
-        console.log(this.state.answeredQuestion);
+        // console.log(this.state.answeredQuestion);
     }
 
     render(){
@@ -71,7 +71,9 @@ function mapStateToProps({questions, users, authUser}){
     let unansweredQuestions = [];
     if(authUser !== null)
         user = users[authUser];
-    Object.keys(questions).map(no => questions[no])
+    Object.keys(questions)
+    .sort((a, b) => questions[b].timestamp - questions[a].timestamp)
+    .map(no => questions[no])
     .filter(question => {
         if(user.answers.hasOwnProperty(question.id))
             answeredQuestions.push(question);

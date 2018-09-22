@@ -14,11 +14,11 @@ class Questioninfo extends React.Component{
         this.choice = this.choice.bind(this);
     }
 
-    choice(id){
+    choice(option){
         const { dispatch, question, authUser } = this.props;
         const { answer } = this.state;
         if(!answer){
-            if(id === 1){
+            if(option === 1){
                 dispatch(addAnswerAction(authUser, question.id, 'optionOne'));
                 this.setState({answer: 'optionOne'});
             }else{
@@ -52,7 +52,7 @@ class Questioninfo extends React.Component{
                         userid={question.author}
                         timestamp={question.timestamp}/>
                         <div className="row">
-                            <h4 style={{marginLeft:`5px`}}>Would you rather?</h4>
+                            <h4 style={{marginLeft:`5px`}}>Would you rather? <small>You must vote first to see the results :)</small></h4>
                             <div className="col-md-6 col-sm-12 questions">
                                 <div onClick={() => this.choice(1)} className={classList[0]}>
                                     {question.optionOne.text}              
@@ -69,15 +69,15 @@ class Questioninfo extends React.Component{
                                 <div className="row progress">
                                     <div 
                                     className="col-xs-6" 
-                                    style={{width: `${score1}%`,backgroundColor:`#000`,color:`#fff`}}
+                                    style={score1 != 0 ? {width: `${score1}%`,backgroundColor:`#000`,color:`#fff`} : {display:`none`}}
                                     >
-                                        {score1}% 
+                                        {score1 != 0 ? `${score1}% ` : ''}
                                     </div>
                                     <div 
                                     className="col-xs-6" 
-                                    style={score2 !==0 ? {width: `${score2}%`,backgroundColor:`#000000aa`,color:`#fff`} : {display:`none`}}
+                                    style={score2 != 0 ? {width: `${score2}%`,backgroundColor:`#fff`,border:`1px solid #000`,color:`#000`} : {display:`none`}}
                                     >
-                                        {score1 !== 0 ? `${score2}% ` : ''}
+                                        {score2 != 0 ? `${score2}% ` : ''}
                                     </div>
                                 </div>
                                 <div className="score">
@@ -104,8 +104,8 @@ function mapStateToProps ({ authUser , questions, users }, { match }) {
       }
   
       totalScore = question.optionOne.votes.length + question.optionTwo.votes.length
-      score1 = (question.optionOne.votes.length / totalScore) * 100
-      score2 = (question.optionTwo.votes.length / totalScore) * 100
+      score1 = parseFloat((question.optionOne.votes.length / totalScore) * 100).toFixed(2);
+      score2 = parseFloat((question.optionTwo.votes.length / totalScore) * 100).toFixed(2);
     }
   
     return {

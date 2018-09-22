@@ -86,7 +86,7 @@ class Login extends React.Component{
                                         <input type="text" id="username" className="form-control" placeholder="shrek"/>
                                     </div>
                                     <div className="form-group">
-                                        <label htmlFor="name">Name</label>
+                                        <label htmlFor="name">Firstname</label>
                                         <input type="text" id="name" className="form-control" placeholder="Shrek"/>
                                     </div>
                                     <button className="login" type="submit">Let me in!</button>

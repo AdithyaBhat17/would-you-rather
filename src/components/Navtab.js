@@ -26,7 +26,6 @@ const Navtab = () => (
             </div>
             <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul className="nav navbar-nav">
-                    <li><Link to="/user">Your questions</Link></li>
                     <li><Link to="/add">Add question</Link></li>
                     <li><Link to="/leaderboard">Leaderboard</Link></li>
                 </ul>
@@ -37,7 +36,6 @@ const Navtab = () => (
         </div>
     </nav>
 );
-
 
 export default Navtab;
 
