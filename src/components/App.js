@@ -18,7 +18,7 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
+    <div className="App">  {/*could have used Fragment instead but chose to use a div for styling purpose*/}
         <Switch>
           <Route exact path="/" component={Home}/>
           <Route path="/login" component={Login}/>
