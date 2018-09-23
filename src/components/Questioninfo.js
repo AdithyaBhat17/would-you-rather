@@ -81,7 +81,10 @@ class Questioninfo extends React.Component{
                                     </div>
                                 </div>
                                 <div className="score">
-                                    Total number of votes for this question = {totalScore}
+                                    Total number of votes for this question = {totalScore} 
+                                    <br/> <br/>
+                                    <p><span className="box"></span>&nbsp;Option A</p>
+                                    <p><span className="border-box"></span>&nbsp;Option B</p>
                                 </div>
                             </div>                            
                         )}
