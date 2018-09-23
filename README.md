@@ -3,6 +3,8 @@
 Would you rather is an application built as the second project for the Udacity React Nanodegree.  
 This project was built using React/Redux.  
 
+This project is now live at https://wyr.now.sh
+
 ### Libraries used
 
 * [ReactJS](https://reactjs.org/)  
