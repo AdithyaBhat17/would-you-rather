@@ -7,11 +7,9 @@ import {
 import { getUsers, addQuestionByUser, addAnswerByUser } from './users';
 import { getQuestions, addQuestion, addAnswer } from './questions';
 import { logIn } from './authentication';
- 
-export const INITIAL_DATA = 'INITIAL_DATA';
 
 export function handleInitialData () {
-    return (dispatch) => {
+    return dispatch => {
       getInitialData().then(({users, questions}) => {
         dispatch(getUsers(users))
         dispatch(getQuestions(questions))
