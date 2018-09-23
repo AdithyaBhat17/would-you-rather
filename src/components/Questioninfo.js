@@ -67,6 +67,7 @@ class Questioninfo extends React.Component{
                         {answer && (
                             <div className="container">
                                 <div className="row progress">
+                                    {/* != was used to ignore type checking */}
                                     <div 
                                     className="col-xs-6" 
                                     style={score1 != 0 ? {width: `${score1}%`,backgroundColor:`#000`,color:`#fff`} : {display:`none`}}
@@ -96,6 +97,7 @@ class Questioninfo extends React.Component{
 }
 
 function mapStateToProps ({ authUser , questions, users }, { match }) {
+    // https://reacttraining.com/react-router/web/example/url-params
     let question = questions[match.params.question_id]
     let answer, score1, score2, totalScore;
   

@@ -20,7 +20,7 @@ function Postdata(props){
 }
 
 
-//passing props as second parameter
+//passing props as second parameter i.e (state,props) https://github.com/reduxjs/react-redux/blob/master/docs/api.md
 function mapStateToProps({users}, {userid}){
     return {
         user: users[userid]
