@@ -109,9 +109,9 @@ class Login extends React.Component{
 }
 
 function mapStateToProps ({users, authUser}){
-    const usersProp = Object.keys(users);
+    const userdata = Object.keys(users);
     return{
-        users: usersProp,
+        users: userdata,
         authUser
     }
 }
