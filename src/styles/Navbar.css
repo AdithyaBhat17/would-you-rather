@@ -1,10 +1,10 @@
 @font-face{
-    src: url('../assets/fonts/Dionisio-Bold.ttf');
+    src: url('https://cdn.rawgit.com/AdithyaBhat17/would-you-rather/e7c3a808/src/assets/fonts/Dionisio-Bold.ttf');
     font-family: 'Dionisio';
 }
   
 @font-face{
-    src: url('../assets/fonts/DankMono-Regular.ttf');
+    src: url('https://cdn.rawgit.com/AdithyaBhat17/would-you-rather/e7c3a808/src/assets/fonts/DankMono-Regular.ttf');
     font-family: 'Dank';
 }
 
