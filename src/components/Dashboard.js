@@ -65,6 +65,8 @@ class Dashboard extends React.Component{
     }
 }
 
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/hasOwnProperty
+
 function mapStateToProps({questions, users, authUser}){
     let user;
     let answeredQuestions = [];
