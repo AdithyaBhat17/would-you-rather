@@ -60,7 +60,7 @@ class AddQuestion extends React.Component{
                             <button className="submit">Submit Poll</button>                           
                         </div>
                     </form>
-                    <img src={addimg} alt="Add poll" className="error-img"/>
+                    <img src={addimg} alt="Add poll" className="add-img"/>
                 </div>
             </div>
         )
