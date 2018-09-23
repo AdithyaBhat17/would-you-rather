@@ -21,7 +21,11 @@
   background-color:#000;
 }
 
-
+.add-img{
+  margin:0 auto;
+  display: block;
+  width: 30%;
+}
 
 img{
   max-width: 100%;
@@ -229,6 +233,11 @@ h4{
 @media only screen and (max-width:768px){
   .would-img{
     margin-top:10vh
+  }
+  .add-img{
+    margin:0 auto;
+    display: block;
+    width: 90%;
   }
   .progress {
     margin-left:0px !important;
