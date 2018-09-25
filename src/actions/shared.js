@@ -5,7 +5,7 @@ import {
     saveNewuser
 } from '../util/api';
 import { getUsers, addQuestionByUser, addAnswerByUser } from './users';
-import { getQuestions, addQuestion, addAnswer } from './questions';
+import { getQuestions, addAnswer } from './questions';
 import { logIn } from './authentication';
 
 export function handleInitialData () {
@@ -40,7 +40,7 @@ export function addQuestionAction(authUser, one, two){
         })
         .then(question => {
             dispatch(addQuestionByUser(question));
-            dispatch(addQuestion(question));
+            // dispatch(addQuestion(question));
         });
     }
 }

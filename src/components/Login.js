@@ -53,10 +53,11 @@ class Login extends React.Component{
     }
 
     render(){
+        const {from} = this.props.location.state || {from: {pathname: '/dashboard'}}
         const { login, redirect, userNotFound, usernameTaken } = this.state;
         const { authUser } = this.props;
         if(redirect || authUser !== null)
-            return <Redirect to="/dashboard"/> 
+            return <Redirect to={from}/> 
         return(
             <div>
                 <Navbar/>
@@ -68,7 +69,7 @@ class Login extends React.Component{
                                 <form onSubmit={this.loginForm} className="form">
                                     <div className="form-group">
                                         <label htmlFor="username">Username</label>
-                                        <input type="text" id="username" className="form-control" placeholder="shrek"/>
+                                        <input type="text" id="username" className="form-control" required placeholder="shrek"/>
                                     </div>
                                     <button className="login" type="submit">Let me in!</button>
                                     <span 
@@ -83,11 +84,11 @@ class Login extends React.Component{
                                 <form onSubmit={this.signupForm} className="form">
                                     <div className="form-group">
                                         <label htmlFor="username">Username</label>
-                                        <input type="text" id="username" className="form-control" placeholder="shrek"/>
+                                        <input type="text" id="username" className="form-control" required placeholder="shrek"/>
                                     </div>
                                     <div className="form-group">
                                         <label htmlFor="name">Firstname</label>
-                                        <input type="text" id="name" className="form-control" placeholder="Shrek"/>
+                                        <input type="text" id="name" className="form-control" required placeholder="Shrek"/>
                                     </div>
                                     <button className="login" type="submit">Let me in!</button>
                                     <span 

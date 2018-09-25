@@ -29,7 +29,7 @@ class Questioninfo extends React.Component{
     }
 
     render(){
-        const { question, authUser, score1, score2, totalScore } = this.props;
+        const { question, score1, score2, totalScore, authUser } = this.props;
         const { answer } = this.state;
         if(authUser === null)
             return <Redirect to="/login"/>
@@ -103,7 +103,7 @@ function mapStateToProps ({ authUser , questions, users }, { match }) {
   
     if (authUser  !== null) {
       const answers = users[authUser].answers
-  
+        
       if (answers.hasOwnProperty(question.id)) {
         answer = answers[question.id]
       }

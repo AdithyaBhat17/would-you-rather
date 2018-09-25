@@ -19,11 +19,13 @@ function LeaderBoard(props){
                  <div className="table-responsive">
                     <table className="table" align="center">
                         <thead>
-                            <th>Avatar</th>
-                            <th>Username</th>
-                            <th>Questions asked</th>
-                            <th>Questions answered</th>
-                            <th>Total Score</th>
+                            <tr>
+                                <th>Avatar</th>
+                                <th>Username</th>
+                                <th>Questions asked</th>
+                                <th>Questions answered</th>
+                                <th>Total Score</th>
+                            </tr>                            
                         </thead>
                         <tbody>
                             {userinfo.map((user) => (
@@ -35,9 +37,9 @@ function LeaderBoard(props){
                                         className={user.avatar !== '' ? 'avatar' : ''}/>
                                     </td>
                                     <td>{user.name}</td>
-                                    <td>{user.askedQuestions}</td>
-                                    <td>{user.questionsAnswered}</td>
-                                    <td>{user.questionsAnswered + user.askedQuestions}</td>
+                                    <td>{user.questions}</td>
+                                    <td>{user.answers}</td>
+                                    <td>{user.answers + user.questions}</td>
                                 </tr>
                             ))}
                         </tbody>
@@ -56,11 +58,11 @@ function mapStateToProps({users, authUser}){
             id: user,
             name: users[user].name,
             avatar: users[user].avatarURL,
-            askedQuestions: users[user].questions.length,
-            questionsAnswered: Object.keys(users[user].answers).length
+            questions: users[user].questions.length,
+            answers: Object.keys(users[user].answers).length
         });
     });
-    userinfo.sort((a,b) => ((b.askedQuestions + b.questionsAnswered) - (a.askedQuestions + a.questionsAnswered)));
+    userinfo.sort((a,b) => ((b.questions + b.answers) - (a.questions + a.answers)));
     return { 
         userinfo,
         authUser

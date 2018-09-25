@@ -10,6 +10,7 @@ import Logout from './Logout';
 import Questioninfo from './Questioninfo';
 import AddQuestion from './AddQuestion';
 import LeaderBoard from './LeaderBoard';
+import PrivateRoute from './PrivateRoute';
 
 class App extends Component {
   componentDidMount(){
@@ -22,11 +23,11 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={Home}/>
           <Route path="/login" component={Login}/>
-          <Route path="/dashboard" component={Dashboard}/>
-          <Route exact path="/questions/:question_id" component={Questioninfo}/>
+          <PrivateRoute path="/dashboard" component={Dashboard}/>
+          <PrivateRoute exact path="/questions/:question_id" component={Questioninfo}/>
           <Route path="/logout" component={Logout}/>
-          <Route path="/add" component={AddQuestion}/>
-          <Route path="/leaderboard" component={LeaderBoard}/>
+          <PrivateRoute path="/add" component={AddQuestion}/>
+          <PrivateRoute path="/leaderboard" component={LeaderBoard}/>
           <Route component={Error}/> {/* https://tylermcginnis.com/react-router-handling-404-pages/ */}
         </Switch>
       </div>
