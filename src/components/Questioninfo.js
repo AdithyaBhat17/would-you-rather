@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Postdata from './Postdata';
 import { addAnswerAction } from '../actions/shared';
 import { Redirect } from 'react-router-dom';
+import Error from './Error';
 
 class Questioninfo extends React.Component{
     constructor(props){
@@ -29,10 +30,12 @@ class Questioninfo extends React.Component{
     }
 
     render(){
-        const { question, score1, score2, totalScore, authUser } = this.props;
+        const { question, score1, score2, totalScore, authUser, errorPage } = this.props;
         const { answer } = this.state;
         if(authUser === null)
             return <Redirect to="/login"/>
+        if(errorPage)
+            return <Error/>;
         let classList = [];
         if(answer){
             if(answer === 'optionOne'){
@@ -100,6 +103,13 @@ function mapStateToProps ({ authUser , questions, users }, { match }) {
     // https://reacttraining.com/react-router/web/example/url-params
     let question = questions[match.params.question_id]
     let answer, score1, score2, totalScore;
+    let errorPage;
+    if(question === undefined){
+        errorPage = true;
+        return {
+            errorPage
+        }
+    }
   
     if (authUser  !== null) {
       const answers = users[authUser].answers
@@ -111,6 +121,7 @@ function mapStateToProps ({ authUser , questions, users }, { match }) {
       totalScore = question.optionOne.votes.length + question.optionTwo.votes.length
       score1 = parseFloat((question.optionOne.votes.length / totalScore) * 100).toFixed(2);
       score2 = parseFloat((question.optionTwo.votes.length / totalScore) * 100).toFixed(2);
+      errorPage = false;
     }
   
     return {
@@ -119,7 +130,8 @@ function mapStateToProps ({ authUser , questions, users }, { match }) {
       answer,
       totalScore,
       score1,
-      score2
+      score2,
+      errorPage
     }
   }
 
