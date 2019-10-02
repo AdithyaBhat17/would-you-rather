@@ -53,15 +53,15 @@ function LeaderBoard(props){
 
 function mapStateToProps({users, authUser}){
     let userinfo = [];
-    Object.keys(users).map(user => {
+    Object.keys(users).map(user => 
         userinfo.push({
             id: user,
             name: users[user].name,
             avatar: users[user].avatarURL,
             questions: users[user].questions.length,
             answers: Object.keys(users[user].answers).length
-        });
-    });
+        })
+    );
     userinfo.sort((a,b) => ((b.questions + b.answers) - (a.questions + a.answers)));
     return { 
         userinfo,

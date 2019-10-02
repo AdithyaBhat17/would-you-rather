@@ -76,13 +76,11 @@ function mapStateToProps({questions, users, authUser}){
     Object.keys(questions)
     .sort((a, b) => questions[b].timestamp - questions[a].timestamp)
     .map(no => questions[no])
-    .filter(question => {
-        if(user.answers.hasOwnProperty(question.id))
-            answeredQuestions.push(question);
-        else{ 
-            unansweredQuestions.push(question);
-        }
-    });
+    .filter(question => (
+        user.answers.hasOwnProperty(question.id)) ?
+            answeredQuestions.push(question) :
+            unansweredQuestions.push(question)
+    );
     return {
         answeredQuestions,
         unansweredQuestions,

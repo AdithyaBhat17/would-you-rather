@@ -6,7 +6,7 @@ export default function Error(){
     return(
         <div className="container" style={{textAlign:`center`}}>
             <img className="error-img" src={errorimg} alt="error 404"/>
-            <p class="error-text">Oof! Looks like you're lost mate.</p>
+            <p className="error-text">Oof! Looks like you're lost mate.</p>
             <Link 
              to="/login"
              className="login"
